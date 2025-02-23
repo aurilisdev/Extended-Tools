@@ -1,14 +1,14 @@
 package extendedtools.common.item;
 
+import java.util.EnumMap;
+import java.util.Locale;
+
 import extendedtools.References;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
-
-import java.util.EnumMap;
-import java.util.Locale;
 
 public enum ExtendedArmorMaterials {
 

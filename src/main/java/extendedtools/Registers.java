@@ -4,15 +4,28 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Supplier;
-import extendedtools.common.item.*;
+
+import extendedtools.common.item.ExtendedArmorMaterials;
+import extendedtools.common.item.ExtendedItemTier;
+import extendedtools.common.item.PaxelItem;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -86,7 +99,7 @@ public class Registers {
             }
         }
 
-        HashMap<ExtendedArmorMaterials, DeferredHolder> materialMap = new HashMap<>();
+        HashMap<ExtendedArmorMaterials, DeferredHolder<ArmorMaterial, ArmorMaterial>> materialMap = new HashMap<>();
         materialMap.put(ExtendedArmorMaterials.STEEL, STEEL);
         materialMap.put(ExtendedArmorMaterials.BRONZE, BRONZE);
         materialMap.put(ExtendedArmorMaterials.TIN, TIN);

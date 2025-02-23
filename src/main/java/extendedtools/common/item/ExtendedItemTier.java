@@ -1,16 +1,17 @@
 package extendedtools.common.item;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.component.Tool;
-import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.NotNull;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.List;
+import net.minecraft.world.level.block.Block;
 
 public enum ExtendedItemTier implements Tier {
 
