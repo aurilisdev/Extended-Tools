@@ -68,22 +68,22 @@ public class Registers {
                 Supplier<Item> reg = null;
                 switch (type) {
                     case "axe":
-                        reg = () -> new AxeItem(tier, new Properties());
+                        reg = () -> new AxeItem(tier, new Properties().attributes(AxeItem.createAttributes(tier, 6.0f, -3.1f)));
                         break;
                     case "hoe":
-                        reg = () -> new HoeItem(tier, new Properties());
+                        reg = () -> new HoeItem(tier, new Properties().attributes(HoeItem.createAttributes(tier, -2.0F, -1.0F)));
                         break;
                     case "pickaxe":
-                        reg = () -> new PickaxeItem(tier, new Properties());
+                        reg = () -> new PickaxeItem(tier, new Properties().attributes(PickaxeItem.createAttributes(tier, 1.0F, -2.8F)));
                         break;
                     case "shovel":
-                        reg = () -> new ShovelItem(tier, new Properties());
+                        reg = () -> new ShovelItem(tier, new Properties().attributes(ShovelItem.createAttributes(tier, 1.5F, -3.0F)));
                         break;
                     case "sword":
-                        reg = () -> new SwordItem(tier, new Properties());
+                        reg = () -> new SwordItem(tier, new Properties().attributes(SwordItem.createAttributes(tier, 3, -2.4F)));
                         break;
                     case "paxel":
-                        reg = () -> new PaxelItem(tier, new Properties());
+                        reg = () -> new PaxelItem(tier, new Properties().attributes(AxeItem.createAttributes(tier, 7f, -3.5f)));
                         break;
                     default:
                         break;
@@ -93,7 +93,7 @@ public class Registers {
         }
 
         for (Tiers tier : Tiers.values()) {
-            DeferredHolder<Item, PaxelItem> obj = Registers.ITEMS.register("paxel" + tier.name().toLowerCase(), () -> new PaxelItem(tier, (tier == Tiers.NETHERITE ? new Properties().stacksTo(1).fireResistant() : new Properties().stacksTo(1))));
+            DeferredHolder<Item, PaxelItem> obj = Registers.ITEMS.register("paxel" + tier.name().toLowerCase(), () -> new PaxelItem(tier, (tier == Tiers.NETHERITE ? new Properties().stacksTo(1).fireResistant() : new Properties().stacksTo(1)).attributes(AxeItem.createAttributes(tier, 7f, -3.5f))));
             if (tier == Tiers.NETHERITE) {
                 ICON = obj;
             }

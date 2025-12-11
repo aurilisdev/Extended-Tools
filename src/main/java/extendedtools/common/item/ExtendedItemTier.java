@@ -35,15 +35,15 @@ public enum ExtendedItemTier implements Tier {
     private final TagKey<Block> incorrectBlocksForDrops;
     private final int maxUses;
     private final float efficency;
-    private final float attackDammage;
+    private final float baseAttackDamage;
     private final int enchantability;
     private final Ingredient repairIngredient;
 
-    ExtendedItemTier(TagKey<Block> incorrectBlocksForDrops, int maxUses, float efficency, float attackDammage, int enchantability, TagKey<Item> repairTag) {
+    ExtendedItemTier(TagKey<Block> incorrectBlocksForDrops, int maxUses, float efficency, float baseAttackDamage, int enchantability, TagKey<Item> repairTag) {
         this.incorrectBlocksForDrops = incorrectBlocksForDrops;
         this.maxUses = maxUses;
         this.efficency = efficency;
-        this.attackDammage = attackDammage;
+        this.baseAttackDamage = baseAttackDamage;
         this.enchantability = enchantability;
         repairIngredient = Ingredient.of(repairTag);
     }
@@ -60,7 +60,7 @@ public enum ExtendedItemTier implements Tier {
 
     @Override
     public float getAttackDamageBonus() {
-        return attackDammage;
+        return baseAttackDamage;
     }
 
     @Override
@@ -70,7 +70,7 @@ public enum ExtendedItemTier implements Tier {
 
     @Override
     public Tool createToolProperties(TagKey<Block> pBlock) {
-        return new Tool(List.of(Tool.Rule.deniesDrops(this.getIncorrectBlocksForDrops()), Tool.Rule.minesAndDrops(pBlock, this.getSpeed())), 1.0F, 0);
+        return new Tool(List.of(Tool.Rule.deniesDrops(this.getIncorrectBlocksForDrops()), Tool.Rule.minesAndDrops(pBlock, this.getSpeed())), 1.0F, 1);
     }
 
     @Override
