@@ -3,17 +3,7 @@ plugins {
 	id 'maven-publish'
 	id 'net.minecraftforge.gradle' version "${forge_gradle_version}"
 	id 'org.parchmentmc.librarian.forgegradle' version "${parchent_librarian_version}.+"
-    id 'com.matthewprenger.cursegradle' version "${cursegradle_version}"
 }
-
-
-//apply plugin: 'net.minecraftforge.gradle'
-//apply plugin: 'org.spongepowered.mixin'
-//apply plugin: 'org.parchmentmc.librarian.forgegradle'
-
-//apply plugin: 'eclipse'
-//apply plugin: 'maven-publish'
-//apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 libsDirName = "../output"
 distsDirName = "../output"
@@ -131,16 +121,6 @@ tasks.named('publish').configure {
 	dependsOn 'reobfJar'
 }
 
-/*
-task sourcesJar(type: Jar, dependsOn: classes) {
-	from sourceSets.main.allSource
-	classifier = 'sources'
-}
-task deobfJar(type: Jar) {
-	from sourceSets.main.output
-	classifier = 'deobf'
-}
-*/
 artifacts {
 	archives sourcesJar
 	archives deobfJar
@@ -171,20 +151,4 @@ repositories{
 	       name = "ModMaven"
 	       url = "https://modmaven.k-4u.nl"
 	    }
-}
-
-tasks.curseforge.dependsOn jar
-
-curseforge {
-  apiKey = System.getenv("CURSEFORGE_KEY")
-  project {
-    id = '451412'
-    changelog = 'You can find changelog at: https://aurilis.dev/'
-    releaseType = 'release'
-    addGameVersion minecraft_version
-
-    mainArtifact(jar) {
-      displayName=project.name+' ' + project.version
-    }
-  }
 }
