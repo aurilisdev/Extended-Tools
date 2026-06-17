@@ -22,45 +22,50 @@ import net.neoforged.neoforge.common.ItemAbility;
 public class PaxelItem extends DiggerItem {
 
     public PaxelItem(Tier tier, Properties prop) {
-        super(tier, Tags.PAXEL_BLOCKS, prop.durability(tier.getUses() * 2));
+	super(tier, Tags.PAXEL_BLOCKS, prop.durability(tier.getUses() * 2));
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        Level world = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        Player player = context.getPlayer();
-        ItemStack stack = context.getItemInHand();
-        BlockState state = world.getBlockState(pos);
-        BlockState result = state.getToolModifiedState(context, ItemAbilities.AXE_STRIP, false);
-        if (result != null) {
-            world.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
-        } else {
-            if (context.getClickedFace() == Direction.DOWN) return InteractionResult.PASS;
-            BlockState foundResult = state.getToolModifiedState(context, ItemAbilities.SHOVEL_FLATTEN, false);
-            if (foundResult != null && world.isEmptyBlock(pos.above())) {
-                world.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
-                result = foundResult;
-            } else if (state.getBlock() instanceof CampfireBlock && state.getValue(CampfireBlock.LIT) == Boolean.TRUE) {
-                if (!world.isClientSide) {
-                    world.levelEvent(null, 1009 /* WorldEvents.FIRE_EXTINGUISH_SOUND */, pos, 0);
-                }
-                CampfireBlock.dowse(player, world, pos, state);
-                result = state.setValue(CampfireBlock.LIT, false);
-            }
-        }
-        if (result == null) return InteractionResult.PASS;
-        if (!world.isClientSide) {
-            world.setBlock(pos, result, Block.UPDATE_ALL);
-            if (player != null) {
-                stack.hurtAndBreak(1, player, context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
-            }
-        }
-        return InteractionResult.sidedSuccess(world.isClientSide);
+	Level world = context.getLevel();
+	BlockPos pos = context.getClickedPos();
+	Player player = context.getPlayer();
+	ItemStack stack = context.getItemInHand();
+	BlockState state = world.getBlockState(pos);
+	BlockState result = state.getToolModifiedState(context, ItemAbilities.AXE_STRIP, false);
+	if (result != null) {
+	    world.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+	} else {
+	    if (context.getClickedFace() == Direction.DOWN)
+		return InteractionResult.PASS;
+	    BlockState foundResult = state.getToolModifiedState(context, ItemAbilities.SHOVEL_FLATTEN, false);
+	    if (foundResult != null && world.isEmptyBlock(pos.above())) {
+		world.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+		result = foundResult;
+	    } else if (state.getBlock() instanceof CampfireBlock && state.getValue(CampfireBlock.LIT) == Boolean.TRUE) {
+		if (!world.isClientSide) {
+		    world.levelEvent(null, 1009 /* WorldEvents.FIRE_EXTINGUISH_SOUND */, pos, 0);
+		}
+		CampfireBlock.dowse(player, world, pos, state);
+		result = state.setValue(CampfireBlock.LIT, false);
+	    }
+	}
+	if (result == null)
+	    return InteractionResult.PASS;
+	if (!world.isClientSide) {
+	    world.setBlock(pos, result, Block.UPDATE_ALL);
+	    if (player != null) {
+		stack.hurtAndBreak(1, player, context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND
+			: EquipmentSlot.OFFHAND);
+	    }
+	}
+	return InteractionResult.sidedSuccess(world.isClientSide);
     }
 
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
-        return ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(itemAbility) || ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility) || ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility);
+	return ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(itemAbility)
+		|| ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility)
+		|| ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility);
     }
 }

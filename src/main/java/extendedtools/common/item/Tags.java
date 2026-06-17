@@ -17,14 +17,15 @@ public class Tags {
     public static final TagKey<Item> INGOT_TITANIUM = forgeTag("ingots/titanium");
     public static final TagKey<Item> INGOT_VANADIUM = forgeTag("ingots/vanadium");
 
-    public static final TagKey<Block> PAXEL_BLOCKS = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "paxelblocks"));
+    public static final TagKey<Block> PAXEL_BLOCKS = BlockTags
+	    .create(ResourceLocation.fromNamespaceAndPath("c", "paxelblocks"));
 
     public static void init() {
 
     }
 
     private static TagKey<Item> forgeTag(String name) {
-        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
+	return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
 
 }

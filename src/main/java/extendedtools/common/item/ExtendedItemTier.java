@@ -16,21 +16,29 @@ import net.minecraft.world.level.block.Block;
 public enum ExtendedItemTier implements Tier {
 
     //
-    STEEL(BlockTags.INCORRECT_FOR_IRON_TOOL, (int) (Tiers.IRON.getUses() * 2.7), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus() * 1.2f, 5, Tags.INGOT_STEEL),
+    STEEL(BlockTags.INCORRECT_FOR_IRON_TOOL, (int) (Tiers.IRON.getUses() * 2.7), Tiers.IRON.getSpeed(),
+	    Tiers.IRON.getAttackDamageBonus() * 1.2f, 5, Tags.INGOT_STEEL),
     //
-    BRONZE(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.IRON.getUses(), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_BRONZE),
+    BRONZE(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.IRON.getUses(), Tiers.IRON.getSpeed(),
+	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_BRONZE),
     //
-    TIN(BlockTags.INCORRECT_FOR_STONE_TOOL, Tiers.STONE.getUses(), Tiers.STONE.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_TIN),
+    TIN(BlockTags.INCORRECT_FOR_STONE_TOOL, Tiers.STONE.getUses(), Tiers.STONE.getSpeed(),
+	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_TIN),
     //
-    COPPER(BlockTags.INCORRECT_FOR_STONE_TOOL, Tiers.STONE.getUses() * 2, Tiers.STONE.getSpeed(), Tiers.STONE.getAttackDamageBonus(), 5, net.neoforged.neoforge.common.Tags.Items.INGOTS_COPPER),
+    COPPER(BlockTags.INCORRECT_FOR_STONE_TOOL, Tiers.STONE.getUses() * 2, Tiers.STONE.getSpeed(),
+	    Tiers.STONE.getAttackDamageBonus(), 5, net.neoforged.neoforge.common.Tags.Items.INGOTS_COPPER),
     //
-    LEAD(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.DIAMOND.getUses() * 2, Tiers.STONE.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_LEAD),
+    LEAD(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.DIAMOND.getUses() * 2, Tiers.STONE.getSpeed(),
+	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_LEAD),
     //
-    VANADIUM(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.STONE.getUses(), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_VANADIUM),
+    VANADIUM(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.STONE.getUses(), Tiers.IRON.getSpeed(),
+	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_VANADIUM),
     //
-    SILVER(BlockTags.INCORRECT_FOR_IRON_TOOL, (int) (Tiers.IRON.getUses() * 1.3), Tiers.GOLD.getSpeed(), Tiers.GOLD.getAttackDamageBonus(), 5, Tags.INGOT_SILVER),
+    SILVER(BlockTags.INCORRECT_FOR_IRON_TOOL, (int) (Tiers.IRON.getUses() * 1.3), Tiers.GOLD.getSpeed(),
+	    Tiers.GOLD.getAttackDamageBonus(), 5, Tags.INGOT_SILVER),
     //
-    TITANIUM(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, Tiers.IRON.getUses() * 4, Tiers.IRON.getSpeed() * 1.1f, Tiers.IRON.getAttackDamageBonus() * 1.3f, 5, Tags.INGOT_TITANIUM);
+    TITANIUM(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, Tiers.IRON.getUses() * 4, Tiers.IRON.getSpeed() * 1.1f,
+	    Tiers.IRON.getAttackDamageBonus() * 1.3f, 5, Tags.INGOT_TITANIUM);
 
     private final TagKey<Block> incorrectBlocksForDrops;
     private final int maxUses;
@@ -39,52 +47,54 @@ public enum ExtendedItemTier implements Tier {
     private final int enchantability;
     private final Ingredient repairIngredient;
 
-    ExtendedItemTier(TagKey<Block> incorrectBlocksForDrops, int maxUses, float efficency, float baseAttackDamage, int enchantability, TagKey<Item> repairTag) {
-        this.incorrectBlocksForDrops = incorrectBlocksForDrops;
-        this.maxUses = maxUses;
-        this.efficency = efficency;
-        this.baseAttackDamage = baseAttackDamage;
-        this.enchantability = enchantability;
-        repairIngredient = Ingredient.of(repairTag);
+    ExtendedItemTier(TagKey<Block> incorrectBlocksForDrops, int maxUses, float efficency, float baseAttackDamage,
+	    int enchantability, TagKey<Item> repairTag) {
+	this.incorrectBlocksForDrops = incorrectBlocksForDrops;
+	this.maxUses = maxUses;
+	this.efficency = efficency;
+	this.baseAttackDamage = baseAttackDamage;
+	this.enchantability = enchantability;
+	repairIngredient = Ingredient.of(repairTag);
     }
 
     @Override
     public int getUses() {
-        return maxUses;
+	return maxUses;
     }
 
     @Override
     public float getSpeed() {
-        return efficency;
+	return efficency;
     }
 
     @Override
     public float getAttackDamageBonus() {
-        return baseAttackDamage;
+	return baseAttackDamage;
     }
 
     @Override
     public TagKey<Block> getIncorrectBlocksForDrops() {
-        return incorrectBlocksForDrops;
+	return incorrectBlocksForDrops;
     }
 
     @Override
     public Tool createToolProperties(TagKey<Block> pBlock) {
-        return new Tool(List.of(Tool.Rule.deniesDrops(this.getIncorrectBlocksForDrops()), Tool.Rule.minesAndDrops(pBlock, this.getSpeed())), 1.0F, 1);
+	return new Tool(List.of(Tool.Rule.deniesDrops(this.getIncorrectBlocksForDrops()),
+		Tool.Rule.minesAndDrops(pBlock, this.getSpeed())), 1.0F, 1);
     }
 
     @Override
     public int getEnchantmentValue() {
-        return enchantability;
+	return enchantability;
     }
 
     @Override
     public @NotNull Ingredient getRepairIngredient() {
-        return repairIngredient;
+	return repairIngredient;
     }
 
     public String tag() {
-        return name().toLowerCase();
+	return name().toLowerCase();
     }
 
 }

@@ -16,10 +16,10 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 public class ExtendedTools {
 
     public ExtendedTools(IEventBus bus) {
-        Registers.ARMOR_MATERIALS.register(bus);
-        Registers.ITEMS.register(bus);
-        Registers.CREATIVE_TABS.register(bus);
-        Tags.init();
+	Registers.ARMOR_MATERIALS.register(bus);
+	Registers.ITEMS.register(bus);
+	Registers.CREATIVE_TABS.register(bus);
+	Tags.init();
     }
 
     @SubscribeEvent
@@ -34,13 +34,13 @@ public class ExtendedTools {
     @EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
     private static class ExtendedToolsCreativeRegistry {
 
-        @SubscribeEvent
-        public static void registerItems(BuildCreativeModeTabContentsEvent event) {
-            if (event.getTab() == Registers.MAIN.get()) {
-                Registers.ITEMS.getEntries().forEach(reg -> {
-                    event.accept(reg.get());
-                });
-            }
-        }
+	@SubscribeEvent
+	public static void registerItems(BuildCreativeModeTabContentsEvent event) {
+	    if (event.getTab() == Registers.MAIN.get()) {
+		Registers.ITEMS.getEntries().forEach(reg -> {
+		    event.accept(reg.get());
+		});
+	    }
+	}
     }
 }
