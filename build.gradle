@@ -15,9 +15,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.matthewprenger.cursegradle" version '1.4.0'
-}
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
@@ -142,22 +139,4 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
-}
-
-
-tasks.curseforge.dependsOn jar
-
-
-curseforge {
-  apiKey = System.getenv("CURSEFORGE_KEY")
-  project {
-    id = '451412'
-    changelog = 'You can find changelog at: https://aurilis.dev/'
-    releaseType = 'release'
-    addGameVersion minecraft_version
-
-    mainArtifact(jar) {
-      displayName=project.name+' ' + project.version
-    }
-  }
 }
