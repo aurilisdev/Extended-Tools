@@ -10,9 +10,6 @@ buildscript {
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
-plugins {
-    id "com.matthewprenger.cursegradle" version '1.4.0'
-}
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
@@ -158,10 +155,8 @@ repositories{
 	    url = "https://maven.blamejared.com/"
 	}
 	maven {
-   		// location of a maven mirror for JEI files, as a fallback
-    	name = "ModMaven"
-    	url = "https://modmaven.dev"
-  	}
+  		// location of a maven mirror for JEI files, as a fallback
+   	name = "ModMaven"
+   	url = "https://modmaven.dev"
+ 	}
 }
-
-tasks.curseforge.dependsOn jar
