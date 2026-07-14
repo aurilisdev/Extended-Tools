@@ -12,9 +12,6 @@ buildscript {
 import org.ajoberstar.gradle.git.tasks.GitTag
 import org.ajoberstar.gradle.git.tasks.GitPush
 
-plugins {
-    id "com.matthewprenger.cursegradle" version '1.4.0'
-}
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
@@ -149,20 +146,4 @@ task createTag(type: GitTag) {
 
 task pushTag(type: GitPush, dependsOn: createTag) {
    namesOrSpecs = [gittagnew]
-}
-tasks.curseforge.dependsOn jar
-tasks.curseforge.dependsOn pushTag
-
-curseforge {
-  apiKey = System.getenv("CURSEFORGE_KEY")
-  project {
-    id = '451412'
-    changelog = 'You can find changelog at: https://aurilis.dev/'
-    releaseType = 'release'
-    addGameVersion minecraft_version
-
-    mainArtifact(jar) {
-      displayName=project.name+' ' + project.version
-    }
-  }
 }
