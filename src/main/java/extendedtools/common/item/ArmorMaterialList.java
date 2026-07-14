@@ -26,7 +26,7 @@ public enum ArmorMaterialList implements IArmorMaterial {
 	TITANIUM(60, new int[] { 4, 6, 8, 4 }, 10, SoundEvents.ARMOR_EQUIP_IRON, 2, 0);
 	//
 
-	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
+	private static final int[] MAX_DAMAGE_ARRAY = { 13, 15, 16, 11 };
 	private final int maxDamageFactor;
 	private final int[] damageReductionAmountArray;
 	private final int enchantability;
