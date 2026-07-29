@@ -44,8 +44,8 @@ public enum ExtendedArmorMaterials {
 	layer = new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(References.ID, name));
     }
 
-    public int getDurabilityForType(Type slotIn) {
-	return map.get(slotIn) * maxDamage;
+    public int getDurabilityForType(Type type) {
+	return type.getDurability(maxDamage);
     }
 
     public String getName() {

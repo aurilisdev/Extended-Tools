@@ -15,46 +15,51 @@ import net.minecraft.world.level.block.Block;
 
 public enum ExtendedItemTier implements Tier {
 
-    //
     STEEL(BlockTags.INCORRECT_FOR_IRON_TOOL, (int) (Tiers.IRON.getUses() * 2.7), Tiers.IRON.getSpeed(),
-	    Tiers.IRON.getAttackDamageBonus() * 1.2f, 5, Tags.INGOT_STEEL),
-    //
+	    Tiers.IRON.getAttackDamageBonus() * 1.2F, 5, Tags.INGOT_STEEL, 0.00F),
+
     BRONZE(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.IRON.getUses(), Tiers.IRON.getSpeed(),
-	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_BRONZE),
-    //
+	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_BRONZE, -0.05F),
+
     TIN(BlockTags.INCORRECT_FOR_STONE_TOOL, Tiers.STONE.getUses(), Tiers.STONE.getSpeed(),
-	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_TIN),
-    //
+	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_TIN, 0.10F),
+
     COPPER(BlockTags.INCORRECT_FOR_STONE_TOOL, Tiers.STONE.getUses() * 2, Tiers.STONE.getSpeed(),
-	    Tiers.STONE.getAttackDamageBonus(), 5, net.neoforged.neoforge.common.Tags.Items.INGOTS_COPPER),
-    //
+	    Tiers.STONE.getAttackDamageBonus(), 5, net.neoforged.neoforge.common.Tags.Items.INGOTS_COPPER, 0.05F),
+
     LEAD(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.DIAMOND.getUses() * 2, Tiers.STONE.getSpeed(),
-	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_LEAD),
-    //
+	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_LEAD, -0.20F),
+
     VANADIUM(BlockTags.INCORRECT_FOR_IRON_TOOL, Tiers.STONE.getUses(), Tiers.IRON.getSpeed(),
-	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_VANADIUM),
-    //
+	    Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_VANADIUM, 0.05F),
+
     SILVER(BlockTags.INCORRECT_FOR_IRON_TOOL, (int) (Tiers.IRON.getUses() * 1.3), Tiers.GOLD.getSpeed(),
-	    Tiers.GOLD.getAttackDamageBonus(), 5, Tags.INGOT_SILVER),
-    //
-    TITANIUM(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, Tiers.IRON.getUses() * 4, Tiers.IRON.getSpeed() * 1.1f,
-	    Tiers.IRON.getAttackDamageBonus() * 1.3f, 5, Tags.INGOT_TITANIUM);
+	    Tiers.GOLD.getAttackDamageBonus(), 5, Tags.INGOT_SILVER, 0.15F),
+
+    TITANIUM(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, Tiers.IRON.getUses() * 4, Tiers.IRON.getSpeed() * 1.1F,
+	    Tiers.IRON.getAttackDamageBonus() * 1.3F, 5, Tags.INGOT_TITANIUM, 0.10F);
 
     private final TagKey<Block> incorrectBlocksForDrops;
     private final int maxUses;
     private final float efficency;
     private final float baseAttackDamage;
+    private final float attackSpeedOffset;
     private final int enchantability;
     private final Ingredient repairIngredient;
 
-    ExtendedItemTier(TagKey<Block> incorrectBlocksForDrops, int maxUses, float efficency, float baseAttackDamage,
-	    int enchantability, TagKey<Item> repairTag) {
+    ExtendedItemTier(TagKey<Block> incorrectBlocksForDrops, int maxUses, float efficiency, float baseAttackDamage,
+	    int enchantability, TagKey<Item> repairTag, float attackSpeedOffset) {
 	this.incorrectBlocksForDrops = incorrectBlocksForDrops;
 	this.maxUses = maxUses;
-	this.efficency = efficency;
+	this.efficency = efficiency;
 	this.baseAttackDamage = baseAttackDamage;
 	this.enchantability = enchantability;
-	repairIngredient = Ingredient.of(repairTag);
+	this.repairIngredient = Ingredient.of(repairTag);
+	this.attackSpeedOffset = attackSpeedOffset;
+    }
+
+    public float getAttackSpeedOffset() {
+	return attackSpeedOffset;
     }
 
     @Override

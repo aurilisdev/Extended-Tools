@@ -78,29 +78,35 @@ public class Registers {
 		Supplier<Item> reg = null;
 		switch (type) {
 		case "axe":
-		    reg = () -> new AxeItem(tier,
-			    new Properties().attributes(AxeItem.createAttributes(tier, 6.0f, -3.1f)));
+		    reg = () -> new AxeItem(tier, new Properties()
+			    .attributes(AxeItem.createAttributes(tier, 6.0F, -3.1F + tier.getAttackSpeedOffset())));
 		    break;
+
 		case "hoe":
-		    reg = () -> new HoeItem(tier,
-			    new Properties().attributes(HoeItem.createAttributes(tier, -2.0F, -1.0F)));
+		    reg = () -> new HoeItem(tier, new Properties()
+			    .attributes(HoeItem.createAttributes(tier, -2.0F, -1.0F + tier.getAttackSpeedOffset())));
 		    break;
+
 		case "pickaxe":
-		    reg = () -> new PickaxeItem(tier,
-			    new Properties().attributes(PickaxeItem.createAttributes(tier, 1.0F, -2.8F)));
+		    reg = () -> new PickaxeItem(tier, new Properties()
+			    .attributes(PickaxeItem.createAttributes(tier, 1.0F, -2.8F + tier.getAttackSpeedOffset())));
 		    break;
+
 		case "shovel":
-		    reg = () -> new ShovelItem(tier,
-			    new Properties().attributes(ShovelItem.createAttributes(tier, 1.5F, -3.0F)));
+		    reg = () -> new ShovelItem(tier, new Properties()
+			    .attributes(ShovelItem.createAttributes(tier, 1.5F, -3.0F + tier.getAttackSpeedOffset())));
 		    break;
+
 		case "sword":
-		    reg = () -> new SwordItem(tier,
-			    new Properties().attributes(SwordItem.createAttributes(tier, 3, -2.4F)));
+		    reg = () -> new SwordItem(tier, new Properties()
+			    .attributes(SwordItem.createAttributes(tier, 3.0F, -2.4F + tier.getAttackSpeedOffset())));
 		    break;
+
 		case "paxel":
-		    reg = () -> new PaxelItem(tier,
-			    new Properties().attributes(AxeItem.createAttributes(tier, 7f, -3.5f)));
+		    reg = () -> new PaxelItem(tier, new Properties()
+			    .attributes(AxeItem.createAttributes(tier, 7.0F, -3.5F + tier.getAttackSpeedOffset())));
 		    break;
+
 		default:
 		    break;
 		}
