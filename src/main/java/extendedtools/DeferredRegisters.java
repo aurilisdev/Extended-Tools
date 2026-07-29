@@ -43,26 +43,27 @@ public class DeferredRegisters {
 		Supplier<Item> reg = null;
 		switch (type) {
 		case "axe":
-		    reg = () -> new AxeItem(tier, tier.getAttackDamageBonus() * 1.15f, -3.0f, new Properties());
+		    reg = () -> new AxeItem(tier, 6.0F, -3.1F + tier.getAttackSpeedOffset(), new Properties());
 		    break;
+
 		case "hoe":
-		    reg = () -> new HoeItem(tier, (int) ((int) tier.getAttackDamageBonus() * 0.27f), -1.4f,
-			    new Properties());
+		    reg = () -> new HoeItem(tier, 0, -1.0F + tier.getAttackSpeedOffset(), new Properties());
 		    break;
+
 		case "pickaxe":
-		    reg = () -> new PickaxeItem(tier, (int) ((int) tier.getAttackDamageBonus() * 0.33f), -2.8f,
-			    new Properties());
+		    reg = () -> new PickaxeItem(tier, 1, -2.8F + tier.getAttackSpeedOffset(), new Properties());
 		    break;
+
 		case "shovel":
-		    reg = () -> new ShovelItem(tier, tier.getAttackDamageBonus() * 0.33f, -3.0f, new Properties());
+		    reg = () -> new ShovelItem(tier, 1.5F, -3.0F + tier.getAttackSpeedOffset(), new Properties());
 		    break;
+
 		case "sword":
-		    reg = () -> new SwordItem(tier, (int) tier.getAttackDamageBonus(), -2.4f, new Properties());
+		    reg = () -> new SwordItem(tier, 3, -2.4F + tier.getAttackSpeedOffset(), new Properties());
 		    break;
+
 		case "paxel":
 		    reg = () -> new PaxelItem(tier, new Properties());
-		    break;
-		default:
 		    break;
 		}
 		RegistryObject<Item> obj = DeferredRegisters.ITEMS.register(type + tier.tag(), reg);

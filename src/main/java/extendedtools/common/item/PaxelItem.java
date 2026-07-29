@@ -21,9 +21,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolActions;
 
 public class PaxelItem extends DiggerItem {
+    public PaxelItem(Tier tier, Properties properties) {
+	super(7.0F, -3.5F, tier, BlockTags.MINEABLE_WITH_AXE, properties.durability(tier.getUses() * 2));
+    }
 
-    public PaxelItem(Tier tier, Properties prop) {
-	super(4, -2.4f, tier, BlockTags.MINEABLE_WITH_AXE, prop.durability(tier.getUses() * 2));
+    public PaxelItem(ExtendedItemTier tier, Properties properties) {
+	super(7.0F, -3.5F + tier.getAttackSpeedOffset(), tier, BlockTags.MINEABLE_WITH_AXE,
+		properties.durability(tier.getUses() * 2));
     }
 
     @Deprecated(forRemoval = true)
