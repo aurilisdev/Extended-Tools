@@ -26,50 +26,63 @@ import net.minecraftforge.registries.RegistryObject;
 
 @EventBusSubscriber(modid = References.ID, bus = Bus.MOD)
 public class DeferredRegisters {
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, References.ID);
-	public static Supplier<PaxelItem> icon;
-	static {
-		List<String> types = Arrays.<String>asList("axe", "hoe", "pickaxe", "shovel", "sword", "paxel");
-		for (String type : types) {
-			for (ExtendedItemTier tier : ExtendedItemTier.values()) {
-				Supplier<Item> reg = null;
-				switch (type) {
-				case "axe":
-					reg = () -> new AxeItem(tier, tier.getAttackDamageBonus() * 1.15f, -3.0f, new Properties().tab(References.CORETAB));
-					break;
-				case "hoe":
-					reg = () -> new HoeItem(tier, (int) ((int) tier.getAttackDamageBonus() * 0.27f), -1.4f, new Properties().tab(References.CORETAB));
-					break;
-				case "pickaxe":
-					reg = () -> new PickaxeItem(tier, (int) ((int) tier.getAttackDamageBonus() * 0.33f), -2.8f, new Properties().tab(References.CORETAB));
-					break;
-				case "shovel":
-					reg = () -> new ShovelItem(tier, tier.getAttackDamageBonus() * 0.33f, -3.0f, new Properties().tab(References.CORETAB));
-					break;
-				case "sword":
-					reg = () -> new SwordItem(tier, (int) tier.getAttackDamageBonus(), -2.4f, new Properties().tab(References.CORETAB));
-					break;
-				case "paxel":
-					reg = () -> new PaxelItem(tier, new Properties().tab(References.CORETAB));
-					break;
-				default:
-					break;
-				}
-				ITEMS.register(type + tier.tag(), reg);
-			}
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, References.ID);
+    public static Supplier<PaxelItem> icon;
+    static {
+	List<String> types = Arrays.<String>asList("axe", "hoe", "pickaxe", "shovel", "sword", "paxel");
+	for (String type : types) {
+	    for (ExtendedItemTier tier : ExtendedItemTier.values()) {
+		Supplier<Item> reg = null;
+		switch (type) {
+		case "axe":
+		    reg = () -> new AxeItem(tier, 6.0F, -3.1F + tier.getAttackSpeedOffset(),
+			    new Properties().tab(References.CORETAB));
+		    break;
+
+		case "hoe":
+		    reg = () -> new HoeItem(tier, 0,
+			    -1.0F + tier.getAttackSpeedOffset(), new Properties().tab(References.CORETAB));
+		    break;
+
+		case "pickaxe":
+		    reg = () -> new PickaxeItem(tier, 1, -2.8F + tier.getAttackSpeedOffset(),
+			    new Properties().tab(References.CORETAB));
+		    break;
+
+		case "shovel":
+		    reg = () -> new ShovelItem(tier, 1.5F, -3.0F + tier.getAttackSpeedOffset(),
+			    new Properties().tab(References.CORETAB));
+		    break;
+
+		case "sword":
+		    reg = () -> new SwordItem(tier, 3, -2.4F + tier.getAttackSpeedOffset(),
+			    new Properties().tab(References.CORETAB));
+		    break;
+
+		case "paxel":
+		    reg = () -> new PaxelItem(tier, new Properties().tab(References.CORETAB));
+		    break;
+
+		default:
+		    break;
 		}
-		for (Tiers tier : Tiers.values()) {
-			RegistryObject<PaxelItem> obj = ITEMS.register("paxel" + tier.name().toLowerCase(), () -> new PaxelItem(tier, new Properties().tab(References.CORETAB)));
-			if (tier == Tiers.NETHERITE) {
-				icon = () -> obj.get();
-			}
-		}
-		for (ArmorMaterialList armor : ArmorMaterialList.values()) {
-			for (EquipmentSlot type : EquipmentSlot.values()) {
-				if (type != EquipmentSlot.MAINHAND && type != EquipmentSlot.OFFHAND) {
-					ITEMS.register(type.getName() + armor.getName().replace(References.ID + ":", ""), () -> new ArmorItem(armor, type, new Properties().tab(References.CORETAB)));
-				}
-			}
-		}
+		ITEMS.register(type + tier.tag(), reg);
+	    }
 	}
+	for (Tiers tier : Tiers.values()) {
+	    RegistryObject<PaxelItem> obj = ITEMS.register("paxel" + tier.name().toLowerCase(),
+		    () -> new PaxelItem(tier, new Properties().tab(References.CORETAB)));
+	    if (tier == Tiers.NETHERITE) {
+		icon = () -> obj.get();
+	    }
+	}
+	for (ArmorMaterialList armor : ArmorMaterialList.values()) {
+	    for (EquipmentSlot type : EquipmentSlot.values()) {
+		if (type != EquipmentSlot.MAINHAND && type != EquipmentSlot.OFFHAND) {
+		    ITEMS.register(type.getName() + armor.getName().replace(References.ID + ":", ""),
+			    () -> new ArmorItem(armor, type, new Properties().tab(References.CORETAB)));
+		}
+	    }
+	}
+    }
 }

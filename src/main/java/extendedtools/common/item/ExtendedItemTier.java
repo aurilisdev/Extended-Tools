@@ -2,66 +2,92 @@ package extendedtools.common.item;
 
 import org.jetbrains.annotations.NotNull;
 
+import extendedtools.Tags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public enum ExtendedItemTier implements Tier {
-	STEEL(2, (int) (Tiers.IRON.getUses() * 2.7), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus() * 1.2f, 5),
-	BRONZE(2, Tiers.IRON.getUses(), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5),
-	TIN(1, Tiers.STONE.getUses(), Tiers.STONE.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5),
-	COPPER(1, Tiers.STONE.getUses() * 2, Tiers.STONE.getSpeed(), Tiers.STONE.getAttackDamageBonus(), 5),
-	LEAD(2, Tiers.DIAMOND.getUses() * 2, Tiers.STONE.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5),
-	VANADIUM(2, Tiers.STONE.getUses(), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5),
-	SILVER(2, (int) (Tiers.IRON.getUses() * 1.3), Tiers.GOLD.getSpeed(), Tiers.GOLD.getAttackDamageBonus(), 5),
-	TITANIUM(2, Tiers.IRON.getUses() * 4, Tiers.IRON.getSpeed() * 1.1f, Tiers.IRON.getAttackDamageBonus() * 1.3f, 5);
+    STEEL(2, (int) (Tiers.IRON.getUses() * 2.7), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus() * 1.2F, 5,
+	    Tags.INGOT_STEEL, 0.00F),
 
-	private final int harvestLevel;
-	private final int maxUses;
-	private final float efficency;
-	private final float attackDammage;
-	private final int enchantability;
+    BRONZE(2, Tiers.IRON.getUses(), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_BRONZE,
+	    -0.05F),
 
-	ExtendedItemTier(int harvestLevel, int maxUses, float efficency, float attackDammage, int enchantability) {
-		this.harvestLevel = harvestLevel;
-		this.maxUses = maxUses;
-		this.efficency = efficency;
-		this.attackDammage = attackDammage;
-		this.enchantability = enchantability;
-	}
+    TIN(1, Tiers.STONE.getUses(), Tiers.STONE.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_TIN, 0.10F),
 
-	@Override
-	public int getUses() {
-		return maxUses;
-	}
+    COPPER(1, Tiers.STONE.getUses() * 2, Tiers.STONE.getSpeed(), Tiers.STONE.getAttackDamageBonus(), 5,
+	    net.minecraftforge.common.Tags.Items.INGOTS_COPPER, 0.05F),
 
-	@Override
-	public float getSpeed() {
-		return efficency;
-	}
+    LEAD(2, Tiers.DIAMOND.getUses() * 2, Tiers.STONE.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_LEAD,
+	    -0.20F),
 
-	@Override
-	public float getAttackDamageBonus() {
-		return attackDammage;
-	}
+    VANADIUM(2, Tiers.STONE.getUses(), Tiers.IRON.getSpeed(), Tiers.IRON.getAttackDamageBonus(), 5, Tags.INGOT_VANADIUM,
+	    0.05F),
 
-	@Override
-	public int getLevel() {
-		return harvestLevel;
-	}
+    SILVER(2, (int) (Tiers.IRON.getUses() * 1.3), Tiers.GOLD.getSpeed(), Tiers.GOLD.getAttackDamageBonus(), 5,
+	    Tags.INGOT_SILVER, 0.15F),
 
-	@Override
-	public int getEnchantmentValue() {
-		return enchantability;
-	}
+    TITANIUM(3, Tiers.IRON.getUses() * 4, Tiers.IRON.getSpeed() * 1.1F, Tiers.IRON.getAttackDamageBonus() * 1.3F, 5,
+	    Tags.INGOT_TITANIUM, 0.10F);
 
-	@Override
-	public @NotNull Ingredient getRepairIngredient() {
-		return Ingredient.EMPTY;
-	}
+    private final int harvestLevel;
+    private final int maxUses;
+    private final float efficency;
+    private final float attackDammage;
+    private final int enchantability;
+    private final TagKey<Item> repairTag;
+    private final float attackSpeedOffset;
 
-	public String tag() {
-		return name().toLowerCase();
-	}
+    ExtendedItemTier(int harvestLevel, int maxUses, float efficiency, float attackDamage, int enchantability,
+	    TagKey<Item> repairTag, float attackSpeedOffset) {
+	this.harvestLevel = harvestLevel;
+	this.maxUses = maxUses;
+	this.efficency = efficiency;
+	this.attackDammage = attackDamage;
+	this.enchantability = enchantability;
+	this.repairTag = repairTag;
+	this.attackSpeedOffset = attackSpeedOffset;
+    }
+
+    @Override
+    public int getUses() {
+	return maxUses;
+    }
+
+    @Override
+    public float getSpeed() {
+	return efficency;
+    }
+
+    @Override
+    public float getAttackDamageBonus() {
+	return attackDammage;
+    }
+
+    @Override
+    public int getLevel() {
+	return harvestLevel;
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+	return enchantability;
+    }
+
+    public float getAttackSpeedOffset() {
+	return attackSpeedOffset;
+    }
+
+    @Override
+    public @NotNull Ingredient getRepairIngredient() {
+	return Ingredient.of(repairTag);
+    }
+
+    public String tag() {
+	return name().toLowerCase();
+    }
 
 }
