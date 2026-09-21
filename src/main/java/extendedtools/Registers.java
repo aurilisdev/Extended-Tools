@@ -110,7 +110,8 @@ public class Registers {
 		default:
 		    break;
 		}
-		ITEMS.register(type + tier.tag(), reg);
+		if (reg != null)
+		    ITEMS.register(type + tier.tag(), reg);
 	    }
 	}
 
