@@ -12,7 +12,7 @@ import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 @Mod(References.ID)
-@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = References.ID)
 public class ExtendedTools {
 
     public ExtendedTools(IEventBus bus) {
@@ -31,7 +31,7 @@ public class ExtendedTools {
     public static void onLoadEvent(FMLLoadCompleteEvent event) {
     }
 
-    @EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(value = Dist.CLIENT, modid = References.ID)
     private static class ExtendedToolsCreativeRegistry {
 
 	@SubscribeEvent
